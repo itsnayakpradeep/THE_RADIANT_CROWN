@@ -9,17 +9,16 @@ const app = express();
 //DB CONNECTION
 mongoose.connect(process.env.DATABASE,{
     useNewUrlParser: true,
-    useFindAndModify: false,
     useUnifiedTopology: true,
-    useCreateIndex: true,
 })
 .then(() => console.log("DB Connected"))
 .catch((err) => console.log("DB connection Error: ",err))
 
 //middleware morgan
 const morgan = require("morgan");
-app.use(cors())
+ app.use(cors())
  app.use(morgan("dev"));
+ app.use(express.json());
 
 // route middleware
 readdirSync('./routes').map((r) => 
