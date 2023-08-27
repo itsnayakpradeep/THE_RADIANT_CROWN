@@ -44,7 +44,7 @@ const RegisterForm = ({
           />
         </div>
 
-        <button className='btn btn-primary' type="submit">Submit</button> 
+        <button disabled={!name || !email || !password} className='btn btn-primary' type="submit">Submit</button> 
      </form>
   );
 }

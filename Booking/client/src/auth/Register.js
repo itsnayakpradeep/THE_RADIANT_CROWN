@@ -1,32 +1,31 @@
 import React, { useState } from 'react'
 import RegisterForm from '../components/RegisterForm';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import { register } from '../actions/auth';
 
-const Register =({histroy}) =>  {
+const Register =({  history }) =>  {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  console.log(histroy);
   
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-      const response = await axios.post(`http://localhost:8000/api/register`, {
+      const response = await register({
         name,
         email,
         password
       });
       console.log('REGISTER USER ===>', response);
       toast.success("Regisetr success, Please login.");
+      history.push("/login");
     } catch (err) {
-      console.log("Error ===> ", err);
+      console.log(err);
       if(err.response.status === 400) toast.error(err.response.data);
     }
    
-  }
- 
+  };
+
   return (
     <>
     <div className='container-fluid bg-secondary p-5 text-center'>
