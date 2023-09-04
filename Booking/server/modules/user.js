@@ -29,6 +29,7 @@ const userSchema = new Schema({
     let user = this;
     if(user.isModified('password')) {
         return bcrypt.hash(user.password, 12, function(err, hash){
+            console.log("user.password: ", user.password)
             if(err) {
                 console.error("BCRYPT HASH ERR",err);
                 return next(err);
@@ -40,5 +41,19 @@ const userSchema = new Schema({
         return next();
     }
  });
+
+userSchema.methods.comarePassword = function (password, next) {
+    bcrypt.compare(password, this.password, function(err, match) {
+        console.log("passwordzzzz: ",password);
+        if(err) {
+            console.log('COMPARE PASSWORD ERROR', err);
+            return next(err, false); 
+        }
+        // if no error, we'll get null
+        console.log("MATCH PASSWORD", match);
+        return next(null, match); // true
+    })
+} 
+
 
 export default mongoose.model("User", userSchema);

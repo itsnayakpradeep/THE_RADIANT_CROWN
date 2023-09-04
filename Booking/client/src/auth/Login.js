@@ -2,23 +2,28 @@ import React, { useState } from 'react'
 import LoginForm from '../components/LoginForm';
 import { login } from '../actions/auth';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
-    const [email, setEmail] = useState('pnayak@mail.com');
-    const [password, setPassword] = useState('qwerty');
+    const [email, setEmail] = useState('bapun@mail.com');
+    const [password, setPassword] = useState("Qwerty");
     
+    const dispatch = useDispatch()
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('SEND LOGIN DATA', {email, password });
         try{
-            let response = await login({ 
+            let res = await login({ 
                 email, 
                 password 
             });
-            
-            if(response.data) {
-                console.log('SAVE USER RESPONSE IN REDUX AND ALSO IN LOCAL STORAGE THEN REDIRECT ===> ')
-                console.LOG(response.data);
+            if(res.data) {
+                console.log(
+                    'SAVE USER RESPONSE IN REDUX AND ALSO IN LOCAL STORAGE THEN REDIRECT ===> '
+                );
+                console.log(res.data);
             }
         } catch (err) {
             console.log(err);

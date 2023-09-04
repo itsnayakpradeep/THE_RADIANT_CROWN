@@ -10,6 +10,7 @@ const app = express();
 mongoose.connect(process.env.DATABASE,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
+  
 })
 .then(() => console.log("DB Connected"))
 .catch((err) => console.log("DB connection Error: ",err))
@@ -22,7 +23,8 @@ const morgan = require("morgan");
 
 // route middleware
 readdirSync('./routes').map((r) => 
-    app.use("/api", require(`./routes/${r}`))); // app.use('/api', router);
+// app.use('/api', router);
+    app.use("/api", require(`./routes/${r}`))); 
 
 
 const port = process.env.PORT || 8000; //THIS PORT IS NOT AVAILABLE USE 8000 PORT bydefault
