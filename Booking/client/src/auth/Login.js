@@ -5,12 +5,9 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {
-    const [email, setEmail] = useState('bapun@mail.com');
+    const [email, setEmail] = useState('pnayak@mail.com');
     const [password, setPassword] = useState("Qwerty");
-    
     const dispatch = useDispatch()
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('SEND LOGIN DATA', {email, password });
@@ -24,6 +21,13 @@ const Login = () => {
                     'SAVE USER RESPONSE IN REDUX AND ALSO IN LOCAL STORAGE THEN REDIRECT ===> '
                 );
                 console.log(res.data);
+                // SAVE THE TOKEN TO LOCALSTORAGE FOR AUTHENTICATION OF API CALLS
+                window.localStorage.setItem("auth", JSON.stringify(res.data));
+                // SAVE USER AND TOKEN TO REDUX
+                dispatch({
+                    type: "LOGGED_IN_USER",
+                    payload: res.data
+                });
             }
         } catch (err) {
             console.log(err);
