@@ -15,7 +15,7 @@ function App() {
   return ( 
     <BrowserRouter>
     <TopNav/>
-     <ToastContainer position='top-right' />
+    <ToastContainer position='top-right' />
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />

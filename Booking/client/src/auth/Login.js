@@ -4,13 +4,13 @@ import { login } from '../actions/auth';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 
-const Login = () => {
+const Login = ({ histroy }) => {
     const [email, setEmail] = useState('pnayak@mail.com');
     const [password, setPassword] = useState("Qwerty");
     const dispatch = useDispatch()
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('SEND LOGIN DATA', {email, password });
+        console.log('SEND LOGIN DATA', { email, password });
         try{
             let res = await login({ 
                 email, 
@@ -28,9 +28,10 @@ const Login = () => {
                     type: "LOGGED_IN_USER",
                     payload: res.data
                 });
+                histroy.push("/");
             }
         } catch (err) {
-            console.log(err);
+            console.log("err==>>",err);
             if(err.response.status === 400) toast.error(err.response.data)
         }
     }

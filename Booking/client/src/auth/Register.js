@@ -23,7 +23,7 @@ const Register =({  history }) =>  {
       console.log(err);
       if(err.response.status === 400) toast.error(err.response.data);
     }
-   
+  
   };
 
   return (
@@ -31,7 +31,7 @@ const Register =({  history }) =>  {
     <div className='container-fluid bg-secondary p-5 text-center'>
       <h1>Register</h1>
     </div>
-   
+
     <div className='container'>
       <div className='row'>
         <div className='col-md-6 offset-md-3'>

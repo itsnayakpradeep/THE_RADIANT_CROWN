@@ -25,7 +25,7 @@ const userSchema = new Schema({
     stripeSession: {}
 }, {timestamps: true});
 // Password is Hashed while saving user 
- userSchema.pre("save", function(next) {
+userSchema.pre("save", function(next) {
     let user = this;
     if(user.isModified('password')) {
         return bcrypt.hash(user.password, 12, function(err, hash){
@@ -40,7 +40,7 @@ const userSchema = new Schema({
     } else {
         return next();
     }
- });
+});
 
 userSchema.methods.comarePassword = function (password, next) {
     bcrypt.compare(password, this.password, function(err, match) {
